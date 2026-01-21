@@ -67,6 +67,8 @@ public class ObstacleGenerator : MonoBehaviour
         var keyboard = Keyboard.current;
         if (keyboard != null && keyboard.tKey.wasPressedThisFrame)
         {
+            randomSeed = Random.Range(1, int.MaxValue);
+
             Debug.Log("检测到T键按下，重新生成障碍物...");
             GenerateObstacles();
         }
