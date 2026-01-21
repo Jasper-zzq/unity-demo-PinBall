@@ -294,11 +294,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ba1515935f2da459c96c22acc8df9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleGenerator
-  obstaclePrefab: {fileID: 4863468130173786551, guid: 67317169a8919e94fba8b996b8f9420b, type: 3}
-  minDistance: 1.41
+  obstacleTypes:
+  - prefab: {fileID: 4863468130173786551, guid: 67317169a8919e94fba8b996b8f9420b, type: 3}
+    weight: 10
+    maxCount: 100
+  minDistance: 2.5
   density: 0.3
   margin: 1
   randomSeed: 0
+  enableDetailedLogging: 1
+  showGenerationStats: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

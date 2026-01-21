@@ -1,12 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Text;
+
+[System.Serializable]
+public struct ObstacleType
+{
+    [Tooltip("障碍物预制体")]
+    public GameObject prefab;
+
+    [Tooltip("生成权重 (决定该类型出现的概率)")]
+    [Range(0f, 10f)]
+    public float weight;
+
+    [Tooltip("该类型的最大生成数量 (0表示无限制)")]
+    public int maxCount;
+}
 
 public class ObstacleGenerator : MonoBehaviour
 {
     [Header("生成设置")]
-    [Tooltip("障碍物预制体")]
-    public GameObject obstaclePrefab;
+    [Tooltip("障碍物类型列表")]
+    public ObstacleType[] obstacleTypes;
 
     [Tooltip("障碍物之间的最小距离")]
     [Range(0.1f, 5f)]
@@ -23,24 +39,73 @@ public class ObstacleGenerator : MonoBehaviour
     [Tooltip("随机种子，用于重现相同的生成结果")]
     public int randomSeed = 0;
 
+    [Header("日志设置")]
+    [Tooltip("是否启用详细日志")]
+    public bool enableDetailedLogging = true;
+
+    [Tooltip("是否显示生成统计信息")]
+    public bool showGenerationStats = true;
+
     // 生成的障碍物列表
     private List<GameObject> generatedObstacles = new List<GameObject>();
+
+    // 生成统计信息
+    private Dictionary<string, int> generationStats = new Dictionary<string, int>();
+
+    // 生成日志
+    private StringBuilder generationLog = new StringBuilder();
+
+    void Start()
+    {
+        // 游戏开始时自动生成障碍物
+        GenerateObstacles();
+    }
+
+    void Update()
+    {
+        // 检测T键输入，按T键重新生成障碍物（使用新 Input System）
+        var keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.tKey.wasPressedThisFrame)
+        {
+            Debug.Log("检测到T键按下，重新生成障碍物...");
+            GenerateObstacles();
+        }
+    }
 
     /// <summary>
     /// 生成障碍物
     /// </summary>
     public void GenerateObstacles()
     {
+        float startTime = Time.realtimeSinceStartup;
         ClearObstacles();
+        generationLog.Clear();
+        generationStats.Clear();
 
-        if (obstaclePrefab == null)
+        LogMessage("开始生成障碍物...");
+        LogMessage($"生成时间: {System.DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+
+        // 验证障碍物类型设置
+        if (obstacleTypes == null || obstacleTypes.Length == 0)
         {
-            Debug.LogError("障碍物预制体未设置！");
+            LogError("障碍物类型未设置！");
             return;
+        }
+
+        // 验证每个类型都有有效的预制体
+        for (int i = 0; i < obstacleTypes.Length; i++)
+        {
+            if (obstacleTypes[i].prefab == null)
+            {
+                LogError($"障碍物类型 {i} 的预制体未设置！");
+                return;
+            }
+            generationStats[obstacleTypes[i].prefab.name] = 0;
         }
 
         // 获取当前对象的边界
         Bounds bounds = GetComponent<Renderer>()?.bounds ?? GetComponent<Collider>()?.bounds ?? new Bounds(transform.position, Vector3.one);
+        LogMessage($"生成区域: 中心={bounds.center}, 大小={bounds.size}");
 
         // 考虑边距后的有效区域
         Vector3 effectiveSize = bounds.size - new Vector3(margin * 2, 0, margin * 2);
@@ -50,29 +115,123 @@ public class ObstacleGenerator : MonoBehaviour
         // 确保有效区域是正的
         if (effectiveSize.x <= 0 || effectiveSize.z <= 0)
         {
-            Debug.LogWarning("边距太大，有效生成区域为负数！");
+            LogWarning("边距太大，有效生成区域为负数！");
             return;
         }
 
+        LogMessage($"有效生成区域: 大小={effectiveSize}, 边距={margin}");
+
         // 设置随机种子
         Random.InitState(randomSeed);
+        LogMessage($"随机种子: {randomSeed}");
 
         // 计算大约需要生成的障碍物数量
         float area = effectiveSize.x * effectiveSize.z;
         float obstacleArea = Mathf.PI * (minDistance / 2f) * (minDistance / 2f); // 假设圆形区域
         int estimatedCount = Mathf.RoundToInt(area / obstacleArea * density);
 
+        LogMessage($"生成参数: 面积={area:F2}, 密度={density}, 预估数量={estimatedCount}");
+
         // 使用泊松盘采样生成位置
         List<Vector3> positions = GeneratePoissonDiskSampling(effectiveMin, effectiveMax, minDistance, estimatedCount);
 
-        // 生成障碍物
-        foreach (Vector3 position in positions)
+        LogMessage($"泊松盘采样生成 {positions.Count} 个位置");
+
+        // 计算权重总和用于随机选择类型
+        float totalWeight = 0f;
+        foreach (var type in obstacleTypes)
         {
-            GameObject obstacle = Instantiate(obstaclePrefab, position, Quaternion.identity, transform);
-            generatedObstacles.Add(obstacle);
+            totalWeight += type.weight;
         }
 
-        Debug.Log($"生成了 {generatedObstacles.Count} 个障碍物");
+        // 生成障碍物
+        int generatedCount = 0;
+        Dictionary<string, int> typeCounts = new Dictionary<string, int>();
+
+        foreach (Vector3 position in positions)
+        {
+            // 根据权重随机选择障碍物类型
+            GameObject selectedPrefab = SelectObstacleType(totalWeight);
+
+            if (selectedPrefab != null)
+            {
+                // 检查该类型的最大数量限制
+                string prefabName = selectedPrefab.name;
+                if (!typeCounts.ContainsKey(prefabName))
+                    typeCounts[prefabName] = 0;
+
+                bool canGenerate = true;
+                for (int i = 0; i < obstacleTypes.Length; i++)
+                {
+                    if (obstacleTypes[i].prefab == selectedPrefab &&
+                        obstacleTypes[i].maxCount > 0 &&
+                        typeCounts[prefabName] >= obstacleTypes[i].maxCount)
+                    {
+                        canGenerate = false;
+                        break;
+                    }
+                }
+
+                if (canGenerate)
+                {
+                    GameObject obstacle = Instantiate(selectedPrefab, position, Quaternion.identity, transform);
+                    // 设置预制体缩放值为 (0.05, 10, 0.05)
+                    obstacle.transform.localScale = new Vector3(0.05f,2f, 0.05f);
+                    obstacle.tag = "MapObstacle";
+                    generatedObstacles.Add(obstacle);
+                    typeCounts[prefabName]++;
+                    generatedCount++;
+
+                    if (enableDetailedLogging)
+                    {
+                        LogMessage($"生成障碍物: {prefabName} 在位置 {position}");
+                    }
+                }
+            }
+        }
+
+        float generationTime = Time.realtimeSinceStartup - startTime;
+
+        // 显示生成统计信息
+        LogMessage($"生成完成! 总共生成了 {generatedCount} 个障碍物");
+        LogMessage($"生成耗时: {generationTime:F3} 秒");
+
+        if (showGenerationStats)
+        {
+            LogMessage("生成统计:");
+            foreach (var kvp in typeCounts)
+            {
+                LogMessage($"  {kvp.Key}: {kvp.Value} 个");
+            }
+        }
+
+        // 在控制台输出完整日志
+        if (enableDetailedLogging)
+        {
+            Debug.Log(generationLog.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 根据权重随机选择障碍物类型
+    /// </summary>
+    private GameObject SelectObstacleType(float totalWeight)
+    {
+        if (totalWeight <= 0) return obstacleTypes[0].prefab;
+
+        float randomValue = Random.Range(0f, totalWeight);
+        float currentWeight = 0f;
+
+        foreach (var type in obstacleTypes)
+        {
+            currentWeight += type.weight;
+            if (randomValue <= currentWeight)
+            {
+                return type.prefab;
+            }
+        }
+
+        return obstacleTypes[0].prefab; // 默认返回第一个
     }
 
     /// <summary>
@@ -80,6 +239,8 @@ public class ObstacleGenerator : MonoBehaviour
     /// </summary>
     public void ClearObstacles()
     {
+        int clearedCount = generatedObstacles.Count;
+
         foreach (GameObject obstacle in generatedObstacles)
         {
             if (obstacle != null)
@@ -88,6 +249,74 @@ public class ObstacleGenerator : MonoBehaviour
             }
         }
         generatedObstacles.Clear();
+        generationStats.Clear();
+
+        if (clearedCount > 0)
+        {
+            LogMessage($"清除了 {clearedCount} 个障碍物");
+            if (enableDetailedLogging)
+            {
+                Debug.Log(generationLog.ToString());
+            }
+        }
+    }
+
+    /// <summary>
+    /// 获取生成的障碍物数量
+    /// </summary>
+    public int GetObstacleCount()
+    {
+        return generatedObstacles.Count;
+    }
+
+    /// <summary>
+    /// 获取指定类型障碍物的数量
+    /// </summary>
+    public int GetObstacleCountByType(string prefabName)
+    {
+        return generatedObstacles.FindAll(obj => obj != null && obj.name.StartsWith(prefabName)).Count;
+    }
+
+    /// <summary>
+    /// 获取生成日志
+    /// </summary>
+    public string GetGenerationLog()
+    {
+        return generationLog.ToString();
+    }
+
+    /// <summary>
+    /// 记录普通消息
+    /// </summary>
+    private void LogMessage(string message)
+    {
+        string logEntry = $"[{System.DateTime.Now:HH:mm:ss}] {message}";
+        generationLog.AppendLine(logEntry);
+
+        if (!enableDetailedLogging)
+        {
+            Debug.Log(message);
+        }
+    }
+
+    /// <summary>
+    /// 记录警告消息
+    /// </summary>
+    private void LogWarning(string message)
+    {
+        string logEntry = $"[{System.DateTime.Now:HH:mm:ss}] 警告: {message}";
+        generationLog.AppendLine(logEntry);
+        Debug.LogWarning(message);
+    }
+
+    /// <summary>
+    /// 记录错误消息
+    /// </summary>
+    private void LogError(string message)
+    {
+        string logEntry = $"[{System.DateTime.Now:HH:mm:ss}] 错误: {message}";
+        generationLog.AppendLine(logEntry);
+        Debug.LogError(message);
     }
 
     /// <summary>
