@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public enum PearlType
     {
         钢珠,
-        翡翠珠
+        Pokeball
     }
 
     [Header("生成设置")]
@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
     [Tooltip("钢珠预制体")]
     public GameObject steelBallPrefab;
 
-    [Tooltip("翡翠珠预制体")]
-    public GameObject jadeBallPrefab;
+    [Tooltip("Pokeball预制体")]
+    public GameObject pokeballPrefab;
 
     // 存储生成的玩家对象引用
     private GameObject currentPlayer;
@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour
             case PearlType.钢珠:
                 prefab = steelBallPrefab;
                 break;
-            case PearlType.翡翠珠:
-                prefab = jadeBallPrefab;
+            case PearlType.Pokeball:
+                prefab = pokeballPrefab;
                 break;
         }
 
