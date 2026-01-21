@@ -3700,3 +3700,35 @@ Memory consumption went from 158.0 MB to 153.5 MB.
 Total: 9.564700 ms (FindLiveObjects: 0.917600 ms CreateObjectMapping: 0.363000 ms MarkObjects: 5.884800 ms  DeleteObjects: 2.398100 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 185.867584 seconds.
+  path: Assets/Prefabs/钢珠.prefab
+  artifactKey: Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/钢珠.prefab using Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8c907b8dee2341f1bf8c5d618f6ceb28') in 0.278983 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.945671 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'f7013036d65e7dc611d5f1bf6c87fd79') in 0.0249872 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.837016 seconds.
+  path: Assets/Prefabs/钢珠.prefab
+  artifactKey: Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/钢珠.prefab using Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1732be1d65d9f08bc1c36b3ee0d9cad5') in 0.014071 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.953817 seconds.
+  path: Assets/Prefabs/钢珠.prefab
+  artifactKey: Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Prefabs/钢珠.prefab using Guid(f85839570fdd5ac42b8f68fd77b6d014) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3326d91e3673901d455c2c7b38a73f85') in 0.030178 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
