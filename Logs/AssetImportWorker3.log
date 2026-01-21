@@ -1769,3 +1769,31 @@ Memory consumption went from 160.3 MB to 156.2 MB.
 Total: 9.907500 ms (FindLiveObjects: 0.861600 ms CreateObjectMapping: 0.480800 ms MarkObjects: 5.913600 ms  DeleteObjects: 2.650300 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 2012.350325 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_1_Normal.mat
+  artifactKey: Guid(deb4520aba2c5724abac1773efbb53b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_1_Normal.mat using Guid(deb4520aba2c5724abac1773efbb53b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b86ca0c6adcc5c1b101b14b8551d4862') in 0.5441934 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_2_Occlusion.mat
+  artifactKey: Guid(fd111bd650ec5d24592f1a097bd3d941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_2_Occlusion.mat using Guid(fd111bd650ec5d24592f1a097bd3d941) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'df3c95862f3588016e7928a881ab6ef2') in 0.007649 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_5_Height.mat
+  artifactKey: Guid(ebf3abb3f2a7ba24db035e9e455c7d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_5_Height.mat using Guid(ebf3abb3f2a7ba24db035e9e455c7d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5989fc17b6504489227345fa8f69513e') in 0.008392 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

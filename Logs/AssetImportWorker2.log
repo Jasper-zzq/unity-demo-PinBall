@@ -1929,3 +1929,103 @@ Memory consumption went from 162.0 MB to 157.7 MB.
 Total: 9.667400 ms (FindLiveObjects: 0.963100 ms CreateObjectMapping: 0.528700 ms MarkObjects: 5.870200 ms  DeleteObjects: 2.304200 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 112.406988 seconds.
+  path: Assets/Textures/Ground/Materials
+  artifactKey: Guid(9fc316ddba26d094da65871c9b9b48b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials using Guid(9fc316ddba26d094da65871c9b9b48b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e6342b901b3d2ff5885ffa9f3cce31d8') in 0.0039358 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.061020 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_1_Height.mat
+  artifactKey: Guid(2b73f4ef37f7ec344be4c0e57a0ca4a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_1_Height.mat using Guid(2b73f4ef37f7ec344be4c0e57a0ca4a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '819871ff74c7ab3310ba73f1e70cff32') in 0.3231529 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_5_Albedo.mat
+  artifactKey: Guid(1dc7669fd33472240b3c22b5908583f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_5_Albedo.mat using Guid(1dc7669fd33472240b3c22b5908583f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a73c73eae6f05d64e70c3e0be151165d') in 0.0093097 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_6_Albedo.mat
+  artifactKey: Guid(123eed8e29cad1449836ac3dee57c9f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_6_Albedo.mat using Guid(123eed8e29cad1449836ac3dee57c9f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '796ce56ad1416603ac8db8fcb34e54a6') in 0.0097473 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_2_Height.mat
+  artifactKey: Guid(f1794deedaa424144a70ed2e8c05c0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_2_Height.mat using Guid(f1794deedaa424144a70ed2e8c05c0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0ed6db893d3c327729811a7f920a0b41') in 0.0074381 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_7_Height.mat
+  artifactKey: Guid(c96e9ab48602e8248bb520e0343a8ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_7_Height.mat using Guid(c96e9ab48602e8248bb520e0343a8ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd541fac1d582241fea724424389ed12a') in 0.0074122 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_6_Height.mat
+  artifactKey: Guid(60ce133be017feb49bb59376e3008356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_6_Height.mat using Guid(60ce133be017feb49bb59376e3008356) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e1b5eec668864dbedbf5581a3658926b') in 0.0072051 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_4_Height.mat
+  artifactKey: Guid(4141f18528eefd44a9b8b3b0f716d2a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_4_Height.mat using Guid(4141f18528eefd44a9b8b3b0f716d2a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '29bb59cb4f34dffb502bfae24a544ed9') in 0.008369 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_3_Height.mat
+  artifactKey: Guid(06a991bbc029ebf46bab5b7d2afc2c7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_3_Height.mat using Guid(06a991bbc029ebf46bab5b7d2afc2c7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ac2dd26fc237fdd5ae1d202f89e637d3') in 0.0085908 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_6_Occlusion.mat
+  artifactKey: Guid(43818baa251ba9a4ca8f6bcef364ac1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_6_Occlusion.mat using Guid(43818baa251ba9a4ca8f6bcef364ac1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd008b0677c652f8cde028a96af8ee103') in 0.0068643 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_8_Height.mat
+  artifactKey: Guid(a062eff0b210afe48bcb969d8c455700) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_8_Height.mat using Guid(a062eff0b210afe48bcb969d8c455700) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7358ab33e7265752a2e979d64ce4b822') in 0.0066605 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Textures/Ground/Materials/Ground_7_Occlusion.mat
+  artifactKey: Guid(14bfaf1854870824f934f2014d04c4a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Ground/Materials/Ground_7_Occlusion.mat using Guid(14bfaf1854870824f934f2014d04c4a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1c0b7c9509afdacb0bfd60de1763bc89') in 0.0073356 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

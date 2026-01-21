@@ -109,8 +109,14 @@ public class ObstacleGenerator : MonoBehaviour
 
         // 考虑边距后的有效区域
         Vector3 effectiveSize = bounds.size - new Vector3(margin * 2, 0, margin * 2);
-        Vector3 effectiveMin = bounds.min + new Vector3(margin, bounds.min.y, margin);
-        Vector3 effectiveMax = bounds.max - new Vector3(margin, 0, margin);
+        // 修复: 使用父物体的 world Y 作为生成平面的 Y 值（保证相对父物体 local Y == 0）
+        Vector3 effectiveMin = bounds.min + new Vector3(margin, 0f, margin);
+        Vector3 effectiveMax = bounds.max - new Vector3(margin, 0f, margin);
+
+        // 使用父物体的 world Y 作为生成高度
+        float parentY = transform.position.y;
+        effectiveMin.y = parentY;
+        effectiveMax.y = parentY;
 
         // 确保有效区域是正的
         if (effectiveSize.x <= 0 || effectiveSize.z <= 0)
@@ -342,18 +348,19 @@ public class ObstacleGenerator : MonoBehaviour
             Vector3 point = activePoints[randomIndex];
             bool found = false;
 
-            // 在当前点周围尝试生成新点
+                // 在当前点周围尝试生成新点
             for (int i = 0; i < maxAttempts; i++)
             {
                 // 在minDistance到2*minDistance之间随机选择距离
                 float angle = Random.Range(0f, 2f * Mathf.PI);
                 float distance = Random.Range(minDist, 2f * minDist);
 
-                Vector3 newPoint = point + new Vector3(
-                    Mathf.Cos(angle) * distance,
-                    0,
-                    Mathf.Sin(angle) * distance
-                );
+                    // 直接在 XZ 平面上计算新的 X,Z，并将 Y 强制为 min.y（已由 caller 设置为 0 或期望高度）
+                    Vector3 newPoint = new Vector3(
+                        point.x + Mathf.Cos(angle) * distance,
+                        min.y,
+                        point.z + Mathf.Sin(angle) * distance
+                    );
 
                 // 检查新点是否在有效范围内
                 if (newPoint.x >= min.x && newPoint.x <= max.x &&
