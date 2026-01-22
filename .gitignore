@@ -37,6 +37,7 @@ packages-lock.json
 /Build/
 /Builds/
 /Logs/
+*.log
 *.apk
 *.aab
 *.unitypackage
