@@ -182,9 +182,16 @@ public class ObstacleGenerator : MonoBehaviour
 
                 if (canGenerate)
                 {
-                    GameObject obstacle = Instantiate(selectedPrefab, position, Quaternion.identity, transform);
+                    // 将世界位置转换为父物体的局部位置，然后以局部坐标创建子物体
+                    Vector3 localPos = transform.InverseTransformPoint(position);
+                    // 不对 Y 轴进行旋转影响：固定为父物体局部平面高度（例如 0）
+                    localPos.y = 0f;
+
+                    GameObject obstacle = Instantiate(selectedPrefab, transform);
+                    obstacle.transform.localPosition = localPos;
+                    obstacle.transform.localRotation = Quaternion.identity;
                     // 设置预制体缩放值为 (0.05, 10, 0.05)
-                    obstacle.transform.localScale = new Vector3(0.05f,2f, 0.05f);
+                    obstacle.transform.localScale = new Vector3(0.05f, 2f, 0.05f);
                     obstacle.tag = "MapObstacle";
                     generatedObstacles.Add(obstacle);
                     typeCounts[prefabName]++;
