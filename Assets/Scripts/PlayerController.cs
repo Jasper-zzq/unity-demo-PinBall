@@ -13,14 +13,6 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header("生成设置")]
-    [Tooltip("玩家生成点X坐标")]
-    public float spawnX = 0f;
-
-    [Tooltip("玩家生成点Y坐标")]
-    public float spawnY = 0f;
-
-    [Tooltip("玩家生成点Z坐标")]
-    public float spawnZ = 0f;
 
     [Tooltip("珠子类型")]
     public PearlType pearlType = PearlType.钢珠;
@@ -86,8 +78,18 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // 创建生成点位置
-        Vector3 spawnPosition = new Vector3(spawnX, spawnY, spawnZ);
+        // 获取player-start组件的位置作为生成点
+        GameObject playerStart = GameObject.Find("player-start");
+        Vector3 spawnPosition = Vector3.zero;
+
+        if (playerStart != null)
+        {
+            spawnPosition = playerStart.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("未找到名为'player-start'的GameObject，使用原点作为生成位置");
+        }
 
         // 实例化预制体
         currentPlayer = Instantiate(prefab, spawnPosition, Quaternion.identity);
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         }
 
-        Debug.Log($"玩家已生成: 类型={pearlType}, 位置=({spawnX}, {spawnY}, {spawnZ})");
+        Debug.Log($"玩家已生成: 类型={pearlType}, 位置=({spawnPosition.x}, {spawnPosition.y}, {spawnPosition.z})");
     }
 
     /// <summary>
