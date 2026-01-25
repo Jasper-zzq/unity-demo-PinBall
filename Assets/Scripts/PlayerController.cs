@@ -96,6 +96,11 @@ public class PlayerController : MonoBehaviour
 
         // 设置tag为Player
         currentPlayer.tag = "Player";
+        // 附加碰撞日志组件，记录玩家与其他物体的碰撞和触发事件
+        // if (currentPlayer.GetComponent<PlayerCollisionLogger>() == null)
+        // {
+        //     currentPlayer.AddComponent<PlayerCollisionLogger>();
+        // }
 
         // 添加Rigidbody组件（如果没有的话）
         if (currentPlayer.GetComponent<Rigidbody>() == null)
