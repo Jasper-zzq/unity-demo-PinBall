@@ -26875,15 +26875,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionZoneGenerator
   zoneCount: 10
-  scoringZoneCount: 2
-  pointLightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  scoringZoneCount: 5
+  pointLightColor: {r: 0.14614134, g: 1, b: 0.015686274, a: 1}
   zoneHeight: 2
   zoneThickness: 0.1
   lightIntensity: 2
   lightRange: 5
-  nonScoringLightColor: {r: 1, g: 1, b: 1, a: 1}
-  nonScoringLightIntensity: 0.5
-  nonScoringLightRange: 3
+  runStartupLightSequence: 1
 --- !u!1 &1432597492
 GameObject:
   m_ObjectHideFlags: 0
